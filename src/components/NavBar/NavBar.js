@@ -5,7 +5,17 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import Drawer from '@material-ui/core/Drawer';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import { Link } from "react-router-dom";
+import { withStyles } from "@material-ui/core/styles";
+
+
+import SideBar from '../SideBar/SideBar';
+
+const styles = theme => ({
+   
+});
 
 class NavBar extends Component {
 
@@ -18,6 +28,7 @@ class NavBar extends Component {
     }
 
     render() {
+        const { classes } = this.props;
         return (
             <div>
                 <AppBar>
@@ -31,12 +42,10 @@ class NavBar extends Component {
                         <Button color="inherit">Login</Button>
                     </Toolbar>
                 </AppBar>
-                <Drawer anchor="left" open={this.state.open} onClose={this.toggleDrawer}>
-                    Menu
-                </Drawer>
+             <SideBar toggleDrawer={this.toggleDrawer.bind(this)} open={this.state.open}></SideBar>
             </div>
         )
     }
 }
 
-export default NavBar;
+export default withStyles(styles)(NavBar);
