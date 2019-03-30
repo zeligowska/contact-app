@@ -2,6 +2,11 @@ import React, { Component } from "react";
 import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
 import { withStyles } from "@material-ui/core/styles";
+import { Link } from "react-router-dom";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+
+import routes from "../../routes";
 
 const styles = theme => ({
   list: {
@@ -22,7 +27,23 @@ const SideBar = props => {
       onClose={props.toggleDrawer}
       className={classes.drawer}
     >
-      <List className={classes.list} />
+      <List className={classes.list}>
+        {routes.map(route => (
+          <Link
+            key={route.path}
+            style={{ textDecoration: "none" }}
+            to={route.path}
+            onClick={props.toggleDrawer}
+            text={route.text}
+          >
+            <ListItem button>
+              <ListItemText classes={{ primary: "list-item-text" }}>
+                {route.text}
+              </ListItemText>
+            </ListItem>
+          </Link>
+        ))}
+      </List>
     </Drawer>
   );
 };
